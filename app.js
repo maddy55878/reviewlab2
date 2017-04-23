@@ -21,8 +21,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', routes);
+app.use(express.static(path.join(__dirname, 'app_client')));
+app.get('/', function (req, res) {
+    res.render(__dirname + '/app_client/topview.jade');
+});
+app.use('/api', routes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
